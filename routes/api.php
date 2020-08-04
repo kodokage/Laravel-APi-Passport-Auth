@@ -1,5 +1,6 @@
 <?php
 
+use Facade\FlareClient\Api;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,3 +21,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('register', 'API\RegisterController@register');
 Route::post('login', 'API\RegisterController@login');
+
+
+Route::middleware('auth:api')->get('/user', function (Request $request) {
+        //return $request->user();
+        Route::get('products', 'API\ProductController@index');
+        Route::post('product', 'API\ProductController@store');
+        Route::patch('product/{id}', 'API\ProductController@update');
+        Route::delete('product/{id}', 'API\ProductController@destroy');
+    });
+
+
